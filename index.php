@@ -23,5 +23,13 @@
 		        </ul>
 	        </nav>
         </header>
+
+        <div class="ui container">
+	        <h1>Bienvenue Hamid,</h1>
+
+	        <p class="introduction">LuxuryCars est une application qui vous permet de louer des voitures simplement et rapidement. Gardez un oeil rapide sur vos réservations, vous pourrez les modifier 24h avant votre réservation !<br><br>LuxuryCars l'expert de votre gestion automobile.</p>
+
+	        <a href="#" class="ui teal button">Commencer</a>
+        </div>
     </body>
 </html>
