@@ -11,24 +11,13 @@
         <link rel="stylesheet" href="styles/main.css">
     </head>
     <body>
-        <header>
-            <p class="title">Luxury Cars</p>
-
-	        <nav>
-		        <ul>
-			        <li><a href="#" class="ui teal button">Créer mon compte</a></li>
-			        <li><a href="#" class="ui button">Me connecter</a></li>
-
-			        <li><a href="#" class="ui button">Véhicules</a></li>
-		        </ul>
-	        </nav>
-        </header>
+        <?php include "components/header.php"; ?>
 
         <div class="ui container">
 	        <h1>Bienvenue Hamid,</h1>
 
 	        <p class="introduction">LuxuryCars est une application qui vous permet de louer des voitures simplement et rapidement. Gardez un oeil rapide sur vos réservations, vous pourrez les modifier 24h avant votre réservation !<br><br>LuxuryCars l'expert de votre gestion automobile.</p>
-
+	        <br>
 	        <a href="#" class="ui teal button">Commencer</a>
         </div>
     </body>
