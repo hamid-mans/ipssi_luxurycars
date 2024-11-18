@@ -1,4 +1,5 @@
 <?php
+session_start();
     include 'components/db.php';
 
     $error = "";
@@ -13,9 +14,7 @@
         $telephone = $_POST['telephone'];
         $motdepasse = sha1($_POST['motdepasse']);
 
-        // !empty($civilite) && !empty($prenom) && !empty($nom) && !empty($pseudo) && !empty($email) && !empty($telephone) && !empty($motdepasse)
-
-        if(true)
+        if(!empty($civilite) && !empty($prenom) && !empty($nom) && !empty($pseudo) && !empty($email) && !empty($telephone) && !empty($motdepasse))
         {
             if($civilite == "no")
             {
@@ -43,7 +42,7 @@
 
                                 $reqNewUser = $db->prepare("INSERT INTO personne(civilite, prenom, nom, login, email, role, date_inscription, telephone, motdepasse) VALUES (?,?,?,?,?,?,now(),?,?)");
                                 $reqNewUser->execute([$civilite, $prenom, $nom, $pseudo, $email, 'CLIENT', $telephone, $motdepasse]);
-                                $_SESSION['pseudo'] = $pseudo;
+                                $_SESSION['login'] = $pseudo;
                                 header('location: index.php');
                             }
                         }
