@@ -5,7 +5,7 @@ session_start();
 
 <html>
     <head>
-        <title>Devoir à rendre : Agence de location</title>
+        <title>LuxuryCars - Mon compte</title>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css">
         <link rel="stylesheet" href="styles/main.css">
@@ -22,7 +22,7 @@ session_start();
             <?php if(!isset($_SESSION['login'])) { ?>
 	            <a href="register.php" class="ui teal button">Commencer</a>
             <?php } else { ?>
-		        <a href="#" class="ui teal button">Mon compte</a>
+		        <a href="compte.php" class="ui teal button">Mon compte</a>
             <?php } ?>
 
 

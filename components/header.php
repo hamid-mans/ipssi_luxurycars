@@ -7,7 +7,7 @@
                 <li><a href="register.php" class="ui teal button">Créer mon compte</a></li>
                 <li><a href="login.php" class="ui button">Me connecter</a></li>
             <?php } else { ?>
-                <li><a href="#" class="ui teal button">Mon compte</a></li>
+                <li><a href="compte.php" class="ui teal button">Mon compte</a></li>
                 <li><a href="logout.php" class="ui red button">Se déconnecter</a></li>
             <?php } ?>
 

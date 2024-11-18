@@ -25,6 +25,9 @@ include "components/functions.php";
                     // REUSSI
 
                     $_SESSION['login'] = $personne['login'];
+					$_SESSION['id'] = $personne['id'];
+
+					header('location: compte.php');
                 }
                 else
                 {
@@ -42,7 +45,7 @@ include "components/functions.php";
 
 <html>
 <head>
-    <title>LuxyCars - Connexion</title>
+    <title>LuxuryCars - Connexion</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css">
     <link rel="stylesheet" href="styles/main.css">
