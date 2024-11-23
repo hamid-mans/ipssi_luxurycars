@@ -20,3 +20,39 @@ function getPersonneByEmail($email)
 
     return $req->fetch();
 }
+
+function existTelephone($telephone)
+{
+    global $db;
+    $req = $db->prepare("SELECT * FROM personne WHERE telephone = ?");
+    $req->execute([$telephone]);
+
+    return $req->rowCount();
+}
+
+function existPseudo($pseudo)
+{
+    global $db;
+    $req = $db->prepare("SELECT * FROM personne WHERE login = ?");
+    $req->execute([$pseudo]);
+
+    return $req->rowCount();
+}
+
+function getAllPersonnes()
+{
+    global $db;
+    $req = $db->prepare("SELECT * FROM personne");
+    $req->execute();
+
+    return $req->fetchAll();
+}
+
+function getVoitures()
+{
+    global $db;
+    $req = $db->prepare("SELECT * FROM vehicule");
+    $req->execute();
+
+    return $req->fetchAll();
+}

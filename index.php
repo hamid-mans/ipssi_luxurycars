@@ -5,7 +5,7 @@ session_start();
 
 <html>
     <head>
-        <title>LuxuryCars - Mon compte</title>
+        <title>LuxuryCars - Accueil</title>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css">
         <link rel="stylesheet" href="styles/main.css">

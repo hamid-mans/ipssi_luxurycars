@@ -11,7 +11,13 @@
                 <li><a href="logout.php" class="ui red button">Se déconnecter</a></li>
             <?php } ?>
 
-            <li><a href="#" class="ui button">Véhicules</a></li>
+            <li><a href="vehicules.php" class="ui button">Véhicules</a></li>
+
+	        <?php if(isset($_SESSION['login']) && isset($_SESSION['admin'])) {
+				if($_SESSION['admin']) { ?>
+					<li><a href="admin/utilisateurs.php" class="ui yellow button">Utilisateurs</a></li>
+				<?php }
+	        } ?>
         </ul>
     </nav>
 </header>

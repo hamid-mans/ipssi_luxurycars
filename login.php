@@ -26,6 +26,10 @@ include "components/functions.php";
 
                     $_SESSION['login'] = $personne['login'];
 					$_SESSION['id'] = $personne['id'];
+					if($personne['role'] == 'ADMIN')
+                    {
+						$_SESSION['admin'] = true;
+                    }
 
 					header('location: compte.php');
                 }

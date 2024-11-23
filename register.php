@@ -1,6 +1,7 @@
 <?php
 session_start();
     include 'components/db.php';
+	include 'components/functions.php';
 
     $error = "";
 
@@ -28,36 +29,50 @@ session_start();
                 }
                 else
                 {
-                    if(strlen($telephone) == 10)
+                    if(existPseudo($pseudo))
                     {
-                        if(preg_match("/^\d+$/", $telephone))
+                        $error = "Ce pseudo est déjà utilisé";
+                    }
+					else
+                    {
+                        if(strlen($telephone) == 10)
                         {
-                            if(strpos($motdepasse, ' ') !== false)
+                            if(existTelephone($telephone) >= 1)
                             {
-                                $error = "Aucun espace n'est autorisé pour le pseudonyme et le mot de passe";
+                                $error = "Ce numéro de téléphone est déjà utilisé";
                             }
                             else
                             {
-                                // REUSSI
+                                if(preg_match("/^\d+$/", $telephone))
+                                {
+                                    if(strpos($motdepasse, ' ') !== false)
+                                    {
+                                        $error = "Aucun espace n'est autorisé pour le pseudonyme et le mot de passe";
+                                    }
+                                    else
+                                    {
+                                        // REUSSI
 
-                                $reqNewUser = $db->prepare("INSERT INTO personne(civilite, prenom, nom, login, email, role, date_inscription, telephone, motdepasse) VALUES (?,?,?,?,?,?,now(),?,?)");
-                                $reqNewUser->execute([$civilite, $prenom, $nom, $pseudo, $email, 'CLIENT', $telephone, $motdepasse]);
+                                        $reqNewUser = $db->prepare("INSERT INTO personne(civilite, prenom, nom, login, email, role, date_inscription, telephone, motdepasse) VALUES (?,?,?,?,?,?,now(),?,?)");
+                                        $reqNewUser->execute([$civilite, $prenom, $nom, $pseudo, $email, 'CLIENT', $telephone, $motdepasse]);
 
-								$_SESSION['login'] = $pseudo;
-								$newPersonne = getPersonneByEmail($email);
-								$_SESSION['id'] = $newPersonne['id'];
+                                        $_SESSION['login'] = $pseudo;
+                                        $newPersonne = getPersonneByEmail($email);
+                                        $_SESSION['id'] = $newPersonne['id'];
 
-                                header('location: index.php');
+                                        header('location: index.php');
+                                    }
+                                }
+                                else
+                                {
+                                    $error = "Votre numéro de téléphone est incorrect";
+                                }
                             }
                         }
                         else
                         {
-                            $error = "Votre numéro de téléphone est incorrect";
+                            $error = "Votre numéro de téléphone doit contenir 10 caractères.";
                         }
-                    }
-                    else
-                    {
-                        $error = "Votre numéro de téléphone doit contenir 10 caractères.";
                     }
                 }
             }
