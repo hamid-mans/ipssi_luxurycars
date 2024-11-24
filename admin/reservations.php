@@ -55,7 +55,7 @@ $reservations = getReservations();
                     <?= $vehicule['marque'] . ' ' . $vehicule['modele'] . ' - ' . $vehicule['matricule']; ?>
                 </td>
                 <td><a href="admin/commentaires_reservation.php?id=<?= $reservation['id']; ?>">Voir les <?= $comms; ?> commentaires</a></td>
-                <td><a href="../delete_reservation.php?id=<?= $reservation['id']; ?>">Supprimer</a></td>
+                <td><a href="delete_reservation.php?id=<?= $reservation['id']; ?>">Supprimer</a></td>
             </tr>
         <?php } ?>
     </table>
