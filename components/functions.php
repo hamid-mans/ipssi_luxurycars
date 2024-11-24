@@ -56,3 +56,12 @@ function getVoitures()
 
     return $req->fetchAll();
 }
+
+function getVehiculeById($id)
+{
+    global $db;
+    $req = $db->prepare("SELECT * FROM vehicule WHERE id = ?");
+    $req->execute([$id]);
+
+    return $req->fetch();
+}

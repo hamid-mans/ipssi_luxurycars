@@ -2,8 +2,48 @@
 session_start();
 
 include "../components/functions.php";
+include "../components/db.php";
 
+if(isset($_POST['sub_new_vehicule']))
+{
+	$marque = htmlspecialchars($_POST['marque']);
+	$modele = htmlspecialchars($_POST['modele']);
+	$type = htmlspecialchars($_POST['type']);
+	$matricule = htmlspecialchars($_POST['matricule']);
+	$prix = htmlspecialchars($_POST['prix']);
+	$photo = $_FILES['photo'];
 
+	$error = "";
+
+	$photo_name = explode('.', $photo['name']);
+	$photo_tmp = $_FILES['photo']['tmp_name'];
+
+	if(!empty($photo['name']))
+    {
+		$photo_final = sha1($photo_name[0]) . '.' . $photo_name[1];
+    }
+
+	if(!empty($marque) && !empty($modele) && !empty($type) && !empty($matricule) && !empty($prix) && !empty($photo))
+    {
+		if($prix >= 100 && $prix <= 350)
+        {
+			$reqAddVehicule = $db->prepare("INSERT INTO vehicule(marque, modele, matricule, prix_journalier, type_vehicule, statut_dispo, photo) VALUES(?,?,?,?,?,?,?)");
+			$reqAddVehicule->execute([$marque, $modele, $matricule, $prix, $type, 1, $photo_final ?? null]);
+
+            move_uploaded_file($photo_tmp, "../images/vehicules/" . $photo_final);
+
+            header('location: ../vehicules.php');
+        }
+		else
+        {
+			$error = "Le prix doit être en 100€ et 350€";
+        }
+    }
+	else
+    {
+		$error = "Tous les champs doivent être renseignés. La photo est optionnelle.";
+    }
+}
 
 ?>
 
@@ -21,6 +61,12 @@ include "../components/functions.php";
 
     <h3>Nouvelle voiture</h3><br>
 
+    <?php if(!empty($error)) { ?>
+		<div class="ui negative message">
+            <?= $error; ?>
+		</div>
+    <?php } ?>
+
     <form method="POST" enctype="multipart/form-data" class="ui celled form">
         <div class="three fields">
             <div class="field">
@@ -35,7 +81,7 @@ include "../components/functions.php";
                 <label for="type">Type de véhicule</label>
                 <select name="type" id="type">
                     <option value="Voiture">Voiture</option>
-                    <option value="Moto">Camion</option>
+                    <option value="Camion">Camion</option>
                     <option value="Moto">Moto</option>
                 </select>
             </div>

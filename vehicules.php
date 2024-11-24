@@ -37,6 +37,7 @@ $voitures = getVoitures();
             <th>Prix journalier</th>
             <th>Disponible</th>
             <th>Photo</th>
+	        <?php if($_SESSION['admin']) { ?> <th>Administration</th> <?php } ?>
         </tr>
 
         <?php foreach($voitures as $voiture) { ?>
@@ -46,8 +47,9 @@ $voitures = getVoitures();
                 <td><?= $voiture['matricule']; ?></td>
                 <td><?= $voiture['type_vehicule']; ?></td>
                 <td><?= $voiture['prix_journalier'] . ' €' ?></td>
-                <td><?= ($voiture['statut_dispo']) ? 'Disponible' : 'Pas dispo' ?></td>
-                <td><?= $voiture['photo'] ?></td>
+                <td style="font-weight:bold; color: <?= ($voiture['statut_dispo']) ? 'green' : 'red' ?>"><?= ($voiture['statut_dispo']) ? 'Disponible' : 'Pas dispo' ?></td>
+                <td><?php if(!empty($voiture['photo'])) { ?> <img width="200" src="./images/vehicules/<?= $voiture['photo'] ?>" alt="Photo"> <?php } else echo 'Pas d\'image' ?></td>
+                <?php if($_SESSION['admin']) { ?> <td><a href="admin/edit_vehicule.php?id=<?= $voiture['id']; ?>">Modifier</a> | <a href="admin/delete_vehicule.php?id=<?= $voiture['id'];?>">Supprimer</a></td> <?php } ?>
             </tr>
         <?php } ?>
     </table>
