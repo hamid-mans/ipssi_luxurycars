@@ -5,6 +5,7 @@ session_start();
     include "components/functions.php";
 
     $personne = getPersonneById($_SESSION['id']);
+	$reservations = getReservationsByUser($_SESSION['id']);
 
     $error = "";
 
@@ -80,7 +81,7 @@ session_start();
         <div class="ui container">
             <h1>Bonjour <?= $_SESSION['login'] ?? 'visiteur'; ?>,</h1><br>
 
-            <p class="introduction">Vous pouvez modifier les informations principales de votre compte
+            <p class="introduction">Modifier les informations personnelles de votre compte
             <br><br>
 
             <?php if(!empty($error)) { ?>
@@ -141,6 +142,44 @@ session_start();
                 </div>
 
             </form>
+	        <br><br>
+
+	        <hr>
+
+	        <br><br>
+
+	        <h2>Mes réservations</h2><br>
+
+	        <p class="introduction">
+		        Réservez un nouveau véhicul depuis la <a href="vehicules.php">liste des véhicules</a>
+	        </p><br>
+
+			<table class="ui celled inverted table">
+				<tr>
+					<th>Date de réservation</th>
+					<th></th>
+					<th>Date de début</th>
+					<th>Date de fin</th>
+					<th>Voiture</th>
+					<th>Gérer</th>
+				</tr>
+				<?php foreach($reservations as $reservation) {
+
+					$car = getVehiculeById($reservation['id_vehicule']);
+
+					?>
+					<tr>
+						<td><?= $reservation['date_reservation']; ?></td>
+						<td></td>
+						<td><?= $reservation['date_debut']; ?></td>
+						<td><?= $reservation['date_fin']; ?></td>
+						<td><?= $car['marque'] . ' ' . $car['modele'] . ' - ' . $car['matricule']; ?></td>
+						<td><a href="edit_reservation.php?id=<?= $reservation['id']; ?>">Modifier</a> | <a
+									href="delete_reservation.php?id=<?= $reservation['id']; ?>">Supprimer</a> | <a
+									href="add_commentaire.php?id=<?= $reservation['id']; ?>">Laisser un commentaire</a></td>
+					</tr>
+				<?php } ?>
+			</table>
 
         </div>
     </body>

@@ -13,11 +13,11 @@
             <?php } ?>
 
             <li><a href="vehicules.php" class="ui button">Véhicules</a></li>
-	        <li><a href="reservations.php" class="ui button">Réservations</a></li>
 
 	        <?php if(isset($_SESSION['login']) && isset($_SESSION['admin'])) {
 				if($_SESSION['admin']) { ?>
 					<li><a href="admin/utilisateurs.php" class="ui yellow button">Utilisateurs</a></li>
+					<li><a href="admin/reservations.php" class="ui yellow button">Réservations</a></li>
 				<?php }
 	        } ?>
         </ul>

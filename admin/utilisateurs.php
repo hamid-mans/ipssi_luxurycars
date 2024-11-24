@@ -22,7 +22,7 @@ $personnes = getAllPersonnes();
 
     <h3>Gérer les utilisateurs</h3>
 
-    <table class="ui celled table">
+    <table class="ui celled inverted table">
         <tr class="thead">
             <th>#</th>
             <th>Prénom</th>
@@ -45,8 +45,8 @@ $personnes = getAllPersonnes();
                 <td><?= $personne['telephone']; ?></td>
                 <td><?= $personne['role']; ?></td>
                 <td><?= $personne['date_inscription']; ?></td>
-                <td><a href="edit_utilisateur.php?id=<?= $personne['id']; ?>">Modifier</a> | <a
-			                href="delete_utilisateur.php?id=<?= $personne['id']; ?>">Supprimer</a></td>
+                <td><a href="admin/edit_utilisateur.php?id=<?= $personne['id']; ?>">Modifier</a> | <a
+			                href="admin/delete_utilisateur.php?id=<?= $personne['id']; ?>">Supprimer</a></td>
             </tr>
         <?php } ?>
     </table>

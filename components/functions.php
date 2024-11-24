@@ -65,3 +65,39 @@ function getVehiculeById($id)
 
     return $req->fetch();
 }
+
+function getReservations()
+{
+    global $db;
+    $req = $db->prepare("SELECT * FROM reservation");
+    $req->execute();
+
+    return $req->fetchAll();
+}
+
+function getReservationById($id)
+{
+    global $db;
+    $req = $db->prepare("SELECT * FROM reservation WHERE id = ?");
+    $req->execute([$id]);
+
+    return $req->fetch();
+}
+
+function getReservationsByUser($userId)
+{
+    global $db;
+    $req = $db->prepare("SELECT * FROM reservation WHERE id_personne = ?");
+    $req->execute([$userId]);
+
+    return $req->fetchAll();
+}
+
+function getCommentairesByReservation($id)
+{
+    global $db;
+    $req = $db->prepare("SELECT * FROM commentaire WHERE id_reservation = ?");
+    $req->execute([$id]);
+
+    return $req->fetchAll();
+}
